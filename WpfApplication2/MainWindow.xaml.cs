@@ -22,17 +22,17 @@ namespace WpfApplication2
     /// </summary>
     public partial class MainWindow : Window
     {
-        StandardLife lifeMatrix;
+        RedBlueLife lifeMatrix;
         Thread iterateThread;
 
         public MainWindow()
         {
             InitializeComponent();
-            lifeMatrix = new StandardLife(20);
+            lifeMatrix = new RedBlueLife(20);
             
         }
 
-        private void stopIterate(Object sender = null, RoutedEventArgs rea = null)
+        private void StopIterate(Object sender = null, RoutedEventArgs rea = null)
         {            
             if (iterateThread != null)
             {
@@ -72,7 +72,7 @@ namespace WpfApplication2
             }
         }
 
-        private void startIterateForeverThread(object sender = null, RoutedEventArgs e = null)
+        private void StartIterateForeverThread(object sender = null, RoutedEventArgs e = null)
         {
             ThreadStart job = new ThreadStart(iterateForever);
             iterateThread = new Thread(job);
@@ -80,6 +80,13 @@ namespace WpfApplication2
 
         }
 
+        public void Randomize(Object sender = null, RoutedEventArgs e = null)
+        {
+            lifeMatrix.Randomize();
+            Action updateAction = updateDisplay;
+            this.Dispatcher.Invoke(updateDisplay);
+
+        }
         
         private void updateDisplay()
         {

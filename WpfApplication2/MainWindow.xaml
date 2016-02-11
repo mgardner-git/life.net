@@ -9,11 +9,13 @@
         Loaded="Window_Loaded" Closed="Window_Closed">
     <Grid>
         <Button x:Name="iterateButton" Background="Aquamarine" Click="iterate" Margin="417,296,0,0">Iterate</Button>
-        <Button x:Name="iterateForeverButton" Click="startIterateForeverThread" HorizontalAlignment="Left" VerticalAlignment="Top" Width="92" Margin="241,296,0,0" Height="39">Iterate Forever</Button>
-        <Button x:Name="stopButton" Click="stopIterate" HorizontalAlignment="Left" Margin="333,296,0,0" VerticalAlignment="Top" Width="85" RenderTransformOrigin="0.5,0.5" Height="39">Stop</Button>
+        <Button x:Name="iterateForeverButton" Click="StartIterateForeverThread" HorizontalAlignment="Left" VerticalAlignment="Top" Width="92" Height="39" Margin="241,296,0,0" >Iterate Forever</Button>
+        <Button x:Name="stopButton" Click="StopIterate" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="85" Margin="333,296,0,0" Height="39">Stop</Button>
+        <Button x:Name="randomizeButton" Click="Randomize" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="166,296,0,0" Height="39">Randomize</Button>
         <Grid Name="matrix" Margin="0,0,0,38" Background="Blue">
 
         </Grid>
+        
 
-        </Grid>
+    </Grid>
 </Window>

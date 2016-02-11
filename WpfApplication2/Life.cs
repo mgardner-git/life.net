@@ -15,6 +15,7 @@ namespace Life
 
         public abstract void Iterate();
         public abstract void UpdateDisplay(System.Windows.Controls.Grid matrix);
+        public abstract void Randomize();
         public Object Get(int row, int column)
         {
             return cells[row,column];

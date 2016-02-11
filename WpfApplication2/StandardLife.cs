@@ -39,7 +39,7 @@ namespace Life
             }
         }
 
-        public void Randomize()
+        public override void Randomize()
         {
             Random rnd = new Random();
             for (int row = 0; row < size; row++)
