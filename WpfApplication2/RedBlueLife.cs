@@ -53,8 +53,8 @@ namespace Life
             {
                 for (int column = 0; column < size; column++)
                 {
-                    //get a random number that is from 0 to 3 inclusive
-                    int random = rnd.Next(4);
+                    //get a random number that is from 0 to 5 inclusive
+                    int random = rnd.Next(6);
                     RedBlueCell cell = GetCell(row, column);
                     switch (random)
                     {
@@ -63,7 +63,7 @@ namespace Life
                             break;
                         case 1:
                             cell.state = RedBlueState.BLUE;
-                            break;
+                            break; 
                         default:
                             cell.state = RedBlueState.DEAD;
                             break;

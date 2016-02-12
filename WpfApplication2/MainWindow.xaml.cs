@@ -82,7 +82,10 @@ namespace WpfApplication2
 
         public void Randomize(Object sender = null, RoutedEventArgs e = null)
         {
-            lifeMatrix.Randomize();
+            lock (lifeMatrix)
+            {
+                lifeMatrix.Randomize();
+            }
             Action updateAction = updateDisplay;
             this.Dispatcher.Invoke(updateDisplay);
 
@@ -90,12 +93,17 @@ namespace WpfApplication2
         
         private void updateDisplay()
         {
-
-            lifeMatrix.UpdateDisplay(matrix);
+            lock (lifeMatrix)
+            {
+                lifeMatrix.UpdateDisplay(matrix);
+            }
         }
 
         private void iterate(object sender=null, RoutedEventArgs e=null) {
-            lifeMatrix.Iterate();
+            lock (lifeMatrix)
+            {
+                lifeMatrix.Iterate();
+            }
             Action updateAction = updateDisplay;
             this.Dispatcher.Invoke(updateDisplay);
         }
