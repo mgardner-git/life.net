@@ -17,41 +17,39 @@ namespace Life
         Any live cell with more than 3 live neighbours dies, as if by overpopulation
         Any dead cell with exactly three live neighbours becomes alive, It's color becomes the most common color in it's local block of 9.
     */
-    public class RedBlueLife : Life
+    public class RedBlueLife : LifeMatrix
     {
         
-        private int size;
+        private int _size;
         public RedBlueLife(int inSize)
         {
-            this.size = inSize;
-            cells = new RedBlueCell[size,size];
-            for (int row =0; row < size; row++)
+            this._size = inSize;
+            cells = new RedBlueCell[_size,_size];
+            for (int row =0; row < _size; row++)
             {
-                for (int column = 0; column < size; column++)
+                for (int column = 0; column < _size; column++)
                 {
                     cells[row, column] = new RedBlueCell();
                 }
             }
         }
 
-        public int MatrixSize
+        public override String Label { get { return "Red/Blue"; } }
+
+        public override int Size
         {
             get
             {
-                return size;
-            }
-            set
-            {
-                this.size = value;
+                return _size;
             }
         }
 
         public override void Randomize()
         {
             Random rnd = new Random();
-            for (int row = 0; row < size; row++)
+            for (int row = 0; row < _size; row++)
             {
-                for (int column = 0; column < size; column++)
+                for (int column = 0; column < _size; column++)
                 {
                     //get a random number that is from 0 to 5 inclusive
                     int random = rnd.Next(6);
@@ -76,11 +74,11 @@ namespace Life
 
         public override void Iterate()
         {
-            RedBlueCell[,] newCells = new RedBlueCell[size,size];
+            RedBlueCell[,] newCells = new RedBlueCell[_size,_size];
 
-            for (int row = 0; row < size; row++)
+            for (int row = 0; row < _size; row++)
             {
-                for (int column = 0; column < size; column++)
+                for (int column = 0; column < _size; column++)
                 {
                     int living = countLivingSurroundingCells(row, column);
                     RedBlueState victoriousState = getVictors(row, column); //this species wins in this area
@@ -120,9 +118,9 @@ namespace Life
 
 
 
-            for (int rowIndex = 0; rowIndex < size; rowIndex++)
+            for (int rowIndex = 0; rowIndex < _size; rowIndex++)
             {
-                for (int columnIndex = 0; columnIndex < size; columnIndex++)
+                for (int columnIndex = 0; columnIndex < _size; columnIndex++)
                 {
                     Button square = new Button();
                     RedBlueState state = GetCell(rowIndex, columnIndex).state;
@@ -204,7 +202,7 @@ namespace Life
         }
         private bool isAlive(int row, int column)
         {
-            if (row < 0 || row >= size || column < 0 || column >= size)
+            if (row < 0 || row >= _size || column < 0 || column >= _size)
             {
                 return false;
             }
@@ -217,9 +215,9 @@ namespace Life
         public override String ToString()
         {
             String result = "";
-            for (int rowIndex = 0; rowIndex < size; rowIndex++)
+            for (int rowIndex = 0; rowIndex < _size; rowIndex++)
             {
-                for (int columnIndex = 0; columnIndex < size; columnIndex++)
+                for (int columnIndex = 0; columnIndex < _size; columnIndex++)
                 {
                     result += (GetCell(rowIndex, columnIndex).state) + "\t";
                 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,16 +23,18 @@ namespace WpfApplication2
     /// </summary>
     public partial class MainWindow : Window
     {
-        RedBlueLife lifeMatrix;
+        private LifeMatrix activeLifeMatrix;
+        private ObservableCollection<LifeMatrix> _lifeMatrices;
         Thread iterateThread;
 
         public MainWindow()
         {
             InitializeComponent();
-            lifeMatrix = new RedBlueLife(20);
+            
             
         }
 
+        public ObservableCollection<LifeMatrix> LifeMatrices { get { return _lifeMatrices; } }
         private void StopIterate(Object sender = null, RoutedEventArgs rea = null)
         {            
             if (iterateThread != null)
@@ -82,9 +85,9 @@ namespace WpfApplication2
 
         public void Randomize(Object sender = null, RoutedEventArgs e = null)
         {
-            lock (lifeMatrix)
+            lock (activeLifeMatrix)
             {
-                lifeMatrix.Randomize();
+                activeLifeMatrix.Randomize();
             }
             Action updateAction = updateDisplay;
             this.Dispatcher.Invoke(updateDisplay);
@@ -93,16 +96,16 @@ namespace WpfApplication2
         
         private void updateDisplay()
         {
-            lock (lifeMatrix)
+            lock (activeLifeMatrix)
             {
-                lifeMatrix.UpdateDisplay(matrix);
+                activeLifeMatrix.UpdateDisplay(matrix);
             }
         }
 
         private void iterate(object sender=null, RoutedEventArgs e=null) {
-            lock (lifeMatrix)
+            lock (activeLifeMatrix)
             {
-                lifeMatrix.Iterate();
+                activeLifeMatrix.Iterate();
             }
             Action updateAction = updateDisplay;
             this.Dispatcher.Invoke(updateDisplay);
@@ -110,31 +113,59 @@ namespace WpfApplication2
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            _lifeMatrices = new ObservableCollection<LifeMatrix>();
+            LifeMatrix matrix1 = new StandardLife(20);
+            matrix1.Randomize();
+            _lifeMatrices.Add(matrix1);
+            LifeMatrix matrix2 = new RedBlueLife(20);
+            _lifeMatrices.Add(matrix2);
+            matrix2.Randomize();
+            LifeMatrix matrix3 = new GeneticLife(20);
+            matrix3.Randomize();
+            _lifeMatrices.Add(matrix3);
+
+            activeLifeMatrix = matrix2;
+            typesBox.DataContext = _lifeMatrices;
+
             matrix.RowDefinitions.Clear();
 
-            for (int rowIndex = 0; rowIndex < lifeMatrix.MatrixSize; rowIndex++)
+            for (int rowIndex = 0; rowIndex < activeLifeMatrix.Size; rowIndex++)
             {
                 RowDefinition rowDef = new RowDefinition();
-                rowDef.Height = new GridLength((int)(matrix.ActualHeight / lifeMatrix.MatrixSize));
+                rowDef.Height = new GridLength((int)(matrix.ActualHeight / activeLifeMatrix.Size));
                 matrix.RowDefinitions.Add(rowDef);
             }
             matrix.ColumnDefinitions.Clear();
-            for (int columnIndex = 0; columnIndex < lifeMatrix.MatrixSize; columnIndex++)
+            for (int columnIndex = 0; columnIndex < activeLifeMatrix.Size; columnIndex++)
             {
                 ColumnDefinition colDef = null;
                 colDef = new ColumnDefinition();
-                colDef.Width = new GridLength(matrix.ActualWidth / lifeMatrix.MatrixSize);
+                colDef.Width = new GridLength(matrix.ActualWidth / activeLifeMatrix.Size);
                 matrix.ColumnDefinitions.Add(colDef);
             }
-            lifeMatrix.Randomize();
-            lifeMatrix.Iterate();
+            
+            activeLifeMatrix.Iterate();
             updateDisplay();
+
+
         }
 
 
         private void Window_Closed(object sender, EventArgs e)
         {
 
+        }
+        
+
+        private void OnSelectType(object sender, SelectionChangedEventArgs e)
+        {
+            lock (activeLifeMatrix)
+            {
+                activeLifeMatrix = typesBox.SelectedItem as LifeMatrix;
+                updateDisplay();
+            }
+
+            
         }
     }
 

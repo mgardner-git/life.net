@@ -5,17 +5,25 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApplication2"
         mc:Ignorable="d"
-        Title="MainWindow" Height="365.152" Width="525"
+        Title="MainWindow" Height="420" Width="525"
         Loaded="Window_Loaded" Closed="Window_Closed">
     <Grid>
-        <Button x:Name="iterateButton" Background="Aquamarine" Click="iterate" Margin="417,296,0,0">Iterate</Button>
-        <Button x:Name="iterateForeverButton" Click="StartIterateForeverThread" HorizontalAlignment="Left" VerticalAlignment="Top" Width="92" Height="39" Margin="241,296,0,0" >Start</Button>
-        <Button x:Name="stopButton" Click="StopIterate" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="85" Margin="333,296,0,0" Height="39">Stop</Button>
-        <Button x:Name="randomizeButton" Click="Randomize" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="166,296,0,0" Height="39">Randomize</Button>
-        <Grid Name="matrix" Margin="0,0,0,38" Background="Blue">
+        <Button x:Name="iterateButton" Background="Aquamarine" Click="iterate" Margin="351,326,64,25">Iterate</Button>
+        <Button x:Name="iterateForeverButton" Click="StartIterateForeverThread" HorizontalAlignment="Left" VerticalAlignment="Top" Width="92" Height="39" Margin="174,326,0,0" >Start</Button>
+        <Button x:Name="stopButton" Click="StopIterate" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="85" Margin="266,326,0,0" Height="39">Stop</Button>
+        <Button x:Name="randomizeButton" Click="Randomize" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="99,326,0,0" Height="39">Randomize</Button>
+        <ListBox x:Name="typesBox" ItemsSource="{Binding}" SelectionChanged="OnSelectType" HorizontalAlignment="Left" Height="67" VerticalAlignment="Top" Width="99" Margin="0,326,0,-3" >
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Label}"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <Grid Name="matrix" Margin="0,0,0,64" Background="Blue">
 
         </Grid>
-        
+
+
 
     </Grid>
 </Window>

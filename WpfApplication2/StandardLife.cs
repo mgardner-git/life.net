@@ -11,40 +11,37 @@ namespace Life
     /**
     The original rules for Conway's game of life 
     */
-    public class StandardLife : Life
+    public class StandardLife : LifeMatrix
     {
-        private int size;
+        private int _size;
         public StandardLife(int inSize)
         {
-            this.size = inSize;
-            cells = new StandardCell[size,size];
-            for (int row =0; row < size; row++)
+            this._size = inSize;
+            cells = new StandardCell[_size,_size];
+            for (int row =0; row < _size; row++)
             {
-                for (int column = 0; column < size; column++)
+                for (int column = 0; column < _size; column++)
                 {
                     cells[row, column] = new StandardCell();
                 }
             }
         }
 
-        public int MatrixSize
+        public override String Label { get { return "Standard"; } }
+        public override int Size
         {
             get
             {
-                return size;
-            }
-            set
-            {
-                this.size = value;
+                return _size;
             }
         }
 
         public override void Randomize()
         {
             Random rnd = new Random();
-            for (int row = 0; row < size; row++)
+            for (int row = 0; row < _size; row++)
             {
-                for (int column = 0; column < size; column++)
+                for (int column = 0; column < _size; column++)
                 {
                     //get a random number that is either 0 or 1
                     GetCell(row, column).IsAlive = rnd.Next(2) == 0;
@@ -55,11 +52,11 @@ namespace Life
 
         public override void Iterate()
         {
-            StandardCell[,] newCells = new StandardCell[size,size];
+            StandardCell[,] newCells = new StandardCell[_size,_size];
 
-            for (int row = 0; row < size; row++)
+            for (int row = 0; row < _size; row++)
             {
-                for (int column = 0; column < size; column++)
+                for (int column = 0; column < _size; column++)
                 {
                     int living = countLivingSurroundingCells(row, column);
                     //standard conway rules: https://en.wikipedia.org/wiki/Conway's_Game_of_Life
@@ -96,9 +93,9 @@ namespace Life
 
 
 
-            for (int rowIndex = 0; rowIndex < size; rowIndex++)
+            for (int rowIndex = 0; rowIndex < _size; rowIndex++)
             {
-                for (int columnIndex = 0; columnIndex < size; columnIndex++)
+                for (int columnIndex = 0; columnIndex < _size; columnIndex++)
                 {
                     Button cell = new Button();
                     cell.Background = GetCell(rowIndex, columnIndex).IsAlive ? Brushes.Black : Brushes.White;
@@ -132,7 +129,7 @@ namespace Life
         }
         private bool isAlive(int row, int column)
         {
-            if (row < 0 || row >= size || column < 0 || column >= size)
+            if (row < 0 || row >= _size || column < 0 || column >= _size)
             {
                 return false;
             }
@@ -144,9 +141,9 @@ namespace Life
         public override String ToString()
         {
             String result = "";
-            for (int rowIndex = 0; rowIndex < size; rowIndex++)
+            for (int rowIndex = 0; rowIndex < _size; rowIndex++)
             {
-                for (int columnIndex = 0; columnIndex < size; columnIndex++)
+                for (int columnIndex = 0; columnIndex < _size; columnIndex++)
                 {
                     result += (GetCell(rowIndex, columnIndex).IsAlive ? "O" : "X") + "\t";
                 }

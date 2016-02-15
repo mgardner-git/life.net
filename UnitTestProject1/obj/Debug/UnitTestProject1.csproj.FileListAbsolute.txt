@@ -8,7 +8,6 @@ c:\users\owner\documents\visual studio 2015\Projects\WpfApplication2\UnitTestPro
 c:\users\owner\documents\visual studio 2015\Projects\WpfApplication2\UnitTestProject1\obj\Debug\UnitTestProject1.pdb
 C:\Users\Owner\Documents\Visual Studio 2015\Projects\Life\UnitTestProject1\bin\Debug\UnitTestProject1.dll
 C:\Users\Owner\Documents\Visual Studio 2015\Projects\Life\UnitTestProject1\bin\Debug\UnitTestProject1.pdb
-C:\Users\Owner\Documents\Visual Studio 2015\Projects\Life\UnitTestProject1\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
 C:\Users\Owner\Documents\Visual Studio 2015\Projects\Life\UnitTestProject1\bin\Debug\WpfApplication2.exe
 C:\Users\Owner\Documents\Visual Studio 2015\Projects\Life\UnitTestProject1\bin\Debug\WpfApplication2.pdb
 C:\Users\Owner\Documents\Visual Studio 2015\Projects\Life\UnitTestProject1\obj\Debug\UnitTestProject1.csprojResolveAssemblyReference.cache

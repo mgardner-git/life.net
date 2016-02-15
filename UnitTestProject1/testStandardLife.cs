@@ -6,7 +6,7 @@ using System;
 namespace UnitTestProject1
 {
     [TestClass]
-    public class UnitTest1
+    public class testStandardLife
     {
         [TestMethod]
         //Any live cell with fewer than two live neighbours dies, as if caused by under-population.

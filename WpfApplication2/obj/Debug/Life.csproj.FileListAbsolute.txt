@@ -26,3 +26,4 @@ C:\Users\Owner\Documents\Visual Studio 2015\Projects\Life\WpfApplication2\obj\De
 C:\Users\Owner\Documents\Visual Studio 2015\Projects\Life\WpfApplication2\obj\Debug\WpfApplication2.g.resources
 C:\Users\Owner\Documents\Visual Studio 2015\Projects\Life\WpfApplication2\obj\Debug\WpfApplication2.Properties.Resources.resources
 C:\Users\Owner\Documents\Visual Studio 2015\Projects\Life\WpfApplication2\obj\Debug\Life.csproj.GenerateResource.Cache
+C:\Users\Owner\Documents\Visual Studio 2015\Projects\Life\WpfApplication2\obj\Debug\GeneratedInternalTypeHelper.g.cs

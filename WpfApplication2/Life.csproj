@@ -57,6 +57,7 @@
     </ApplicationDefinition>
     <Compile Include="Delegator.cs" />
     <Compile Include="RedBlueCell.cs" />
+    <Compile Include="GeneticLife.cs" />
     <Compile Include="RedBlueState.cs" />
     <Compile Include="StandardCell.cs" />
     <Compile Include="RedBlueLife.cs" />
